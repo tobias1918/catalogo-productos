@@ -8,6 +8,7 @@ CONFIGURACION BASE DE DATOS:
 - PORT: 3308
 - USER: ROOT
 - PASS: ''
+
 XAMPP Control panel v3.2.2
 
 Realizar 
