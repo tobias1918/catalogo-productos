@@ -15,3 +15,11 @@ Realizar
 - composer install
 
 Si todo funciona correctamente: http://localhost/catalogo-productos/web/#!/login
+
+TECNOLOGIAS APLICADAS:
+- Symfony 3.2
+- PHP 7.0.33
+- Composer
+- AngularJS
+- Bootstrap
+- HTML / CSS / JS
