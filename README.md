@@ -14,6 +14,10 @@ XAMPP Control panel v3.2.2
 Realizar 
 - composer install
 
+Sesion de ADMIN:
+- USER: admin
+- PASS: admin
+
 Si todo funciona correctamente: http://localhost/catalogo-productos/web/#!/login
 
 TECNOLOGIAS APLICADAS:
