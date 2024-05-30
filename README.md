@@ -1,6 +1,8 @@
 # catalogo-productos
 Evaluación Arwebs – Symfony 3: Catálogo de Productos
 
+- Molina Tobias
+
 CONFIGURACION BASE DE DATOS:
 - NAME: catalogodb
 - PORT: 3308
