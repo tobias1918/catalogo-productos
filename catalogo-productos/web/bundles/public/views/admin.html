@@ -1,0 +1,214 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!home">Catalogo | Productos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!home">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!direccionar">Panel Administracion</a></li>
+
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="button" ng-click="logout()">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cerrar Sesion
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Panel Administrador</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Control de productos | categorias</p>
+        </div>
+    </div>
+</header>
+<div style="width: 100%;margin-top: 80px;">
+    <h1 class="display-4 fw-bolder" style="text-align: center;color: #034078;">PANEL PRODUCTOS</h1>
+</div>
+<!-- formulario para crear -->
+<div style="display: flex;align-items: center;justify-content: center;padding: 5%;margin-bottom: 5vw;width: 100%;">
+    <div ng-controller="AdminController">
+        <div class="contenedor-de-div-emergente" style="height: 60px;margin-bottom: 20px;">
+            <div class="alert alert-danger" role="alert" ng-if="errorMessage">
+                {{ errorMessage }}
+            </div>
+            <div class="alert alert-success" role="alert" ng-if="successMessage">
+                {{ successMessage }}
+            </div>
+
+        </div>
+
+        <form style="border: 2px solid black; width: 90vw;padding: 30px;border-radius: 14px;background-color: #f8f9fa;"
+            ng-submit="createProduct()">
+            <h1 class="display-5 fw-bold">Crear Producto</h1>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    ng-model="newProduct.name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Image (URL)</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" ng-model="newProduct.image">
+            </div>
+            <label for="exampleInputPassword1" class="form-label">Category</label>
+
+            <select id="categorySelect" class="form-select form-select-sm" ng-model="newProduct.category_id">
+                <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Crear</button>
+
+        </form>
+    </div>
+</div>
+
+
+<div ng-controller="SearchController" style="background-color: #f8f9fa;">
+
+
+
+    <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-bottom: 10vw;">
+        <div style="border: 2px solid black;height: 100%;width: 90%;border-radius: 8px;">
+            <div class="search"
+                style="height: 180px;width: 100%;display: flex;flex-direction:column;justify-content: center;align-items: center;margin-top: 40px;">
+
+
+                <h1 class="display-5 fw-bold" style="text-align: start;"> Editar | Eliminar</h1>
+                <div class="contenedor-de-div-emergente" style="min-height: 80px;">
+                    <div class="alert alert-danger" role="alert" ng-if="errorMessageDelete">
+                        {{ errorMessageDelete }}
+                    </div>
+                    <div class="alert alert-success" role="alert" ng-if="successMessageDelete">
+                        {{ successMessageDelete }}
+                    </div>
+
+                </div>
+                <input type="search" id="search-button" ng-model="searchQuery" placeholder="Buscar..."
+                    style="padding: 10px; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; width: 70vw;margin-bottom: 30px;"
+                    ng-change="handleSearchQueryChange()">
+
+
+            </div>
+
+            <div
+                style="display: flex;align-items: center;justify-content: center;height: 100%;margin-top: 2%;margin-bottom: 3vw;">
+
+
+                <div class="my-3 p-3 bg-body rounded shadow-sm"
+                    style=" max-height: 50vh;min-height: 50vh; overflow-y: auto;min-width:70vw;">
+
+
+                    <h6 class="border-bottom pb-2 mb-0" style="border-top: 2px solid black;padding-top: 14px;">Productos
+                    </h6>
+
+
+
+                    <div class="d-flex text-body-secondary pt-3" ng-repeat="product in searchResults">
+                        <img ng-src="{{product.category[2]}}" alt=""
+                            style="height: 32px;width: 32px;margin-right: 15px;">
+                        <div class="pb-3 mb-0 big lh-sm border-bottom w-100">
+                            <div class="d-flex justify-content-between">
+                                <a class="text-gray-dark" href="#!/product/{{product.id}}" style="text-decoration: none;color: black;font-weight: 500;">{{product.name}}</a>
+                                <div style="display: flex; gap:3px;margin-left: 2%;max-height: 40px;min-height: 40px;">
+                                    <a type="button" href="#!/edit/product/{{product.id}}"
+                                        class="btn btn-primary">Editar</a>
+                                    <a type="button" class="btn btn-danger"
+                                        ng-click="deleteProduct(product.id)">Eliminar</a>
+                                </div>
+                            </div>
+                            <span class="d-block">{{product.category[1]}}</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+<div style="width: 100%;margin-top: 80px;margin-bottom: 80px;">
+    <h1 class="display-4 fw-bolder" style="text-align: center;color: #034078;">PANEL CATEGORIAS</h1>
+</div>
+
+<div ng-controller="AdminController" style="display: flex;align-items: center;flex-direction: column;justify-content: center;width: 100%;margin-bottom: 50px;">
+    <div class="contenedor-de-div-emergente" style="height: 60px;margin-bottom: 20px;">
+        <div class="alert alert-danger" role="alert" ng-if="errorMessageCategory">
+            {{ errorMessageCategory }}
+        </div>
+        <div class="alert alert-success" role="alert" ng-if="successMessageCategory">
+            {{ successMessageCategory }}
+        </div>
+
+    </div>
+    <form style="border: 2px solid black; width: 90vw;padding: 30px;border-radius: 14px;background-color: #f8f9fa;"
+        ng-submit="createCategory()">
+        <h1 class="display-5 fw-bold">Crear Categoria</h1>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                ng-model="newCategory.name">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Icon (URL)</label>
+            <input type="text" class="form-control" id="exampleInputUser1" ng-model="newCategory.icon">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Crear</button>
+    </form>
+</div>
+
+<div style="display: flex;justify-content: center;align-items: center;margin-bottom: 40vh;">
+    <div
+        style="border: 2px solid black;height: 80%;width: 90%;border-radius: 8px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+
+
+        <h1 class="display-5 fw-bold" style="text-align: start;padding: 20px;"> Editar | Eliminar</h1>
+        <div class="my-3 p-3 bg-body rounded shadow-sm"
+            style=" max-height: 40vh;min-height: 40vh; overflow-y: auto;min-width:70vw;">
+
+
+            <h6 class="border-bottom pb-2 mb-0" style="border-top: 2px solid black;padding-top: 14px;">Categorias</h6>
+
+
+            <div ng-controller="AdminController" style="background-color: #f8f9fa;">
+                <div class="d-flex text-body-secondary pt-3" ng-repeat="category in categories">
+                    <img ng-src="{{category.icon}}" alt="" style="height: 32px;width: 32px;margin-right: 15px;">
+                    <div class="pb-3 mb-0 big lh-sm border-bottom w-100">
+                        <div class="d-flex justify-content-between">
+                            <strong class="text-gray-dark">{{category.name}}</strong>
+                            <div style="display: flex; gap:3px;margin-left: 2%;max-height: 40px;min-height: 40px;">
+                                <a type="button" href="#!/edit/category/{{category.id}}"
+                                    class="btn btn-primary">Editar</a>
+                                <a type="button" class="btn btn-danger"
+                                    ng-click="deleteCategory(category.id)">Eliminar</a>
+                            </div>
+                        </div>
+                        <span class="d-block">ID : {{category.id}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+    </div>
+</footer>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!home">Catalogo | Productos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!home">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!direccionar">Panel Administracion</a></li>
+
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="button" ng-click="logout()">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cerrar Sesion
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Indumentaria</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Catalogo de productos</p>
+        </div>
+    </div>
+</header>
+
+
+<section class="py-5">
+    <div ng-controller="SearchController">
+        <div class="search" style="height: 40px;width: 100%;display: flex;justify-content: center;">
+            <input type="search" id="search-button" ng-model="searchQuery" placeholder="Buscar..."
+                style="padding: 10px; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; width: 70%;"
+                ng-change="handleSearchQueryChange()">
+        </div>
+
+        <div class="container px-4 px-lg-5 mt-5" style="min-height: 100vh;">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5" ng-repeat="product in searchResults">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" ng-src="{{product.image}}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{product.name | truncate:32}}</h5>
+                                {{product.category[1]}}
+                                <br>
+                                <img class="card-img-top" ng-src="{{product.category[2]}}"
+                                    style="height: 1.6rem;width: auto;" alt="..." />
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                    href="#!product/{{product.id}}">Ver Detalle</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Tobias Molina</p>
+    </div>
+</footer>

@@ -1,0 +1,35 @@
+<div
+    style="height: 100vh; display: flex; justify-content: center; align-items: center;flex-direction: column;gap: 0;background-color: rgb(33 37 41); ">
+    <div class="contenedor-de-div-emergente" style="height: 60px;margin-top: 20px;">
+        <div class="alert alert-danger" role="alert" ng-if="login.errorMessage">
+            {{ login.errorMessage }}
+        </div>
+
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 55%;">
+        <main class="form-signin w-100 m-auto" style="background-color: #f8f9fa;padding: 80px;border-radius: 20px;">
+            <div class="login-container" style="width: 210px;">
+                <form ng-submit="login.login()">
+
+                    <h1 class="h3 mb-3 fw-normal">Iniciar sesion</h1>
+                    <div class="form-floating mb-3">
+                        <input type="user" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            ng-model="login.credentials.username" required>
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                            ng-model="login.credentials.password" required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-2" type="submit">Ingresar</button>
+
+                    <div style="width: 100%;display: flex;justify-content: end;margin-top: 20px;">
+                        <a href="#!register" style="text-decoration: none;text-align: center;">Registrarse</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>

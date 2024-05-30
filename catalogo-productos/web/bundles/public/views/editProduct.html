@@ -1,0 +1,27 @@
+<div style="height: 100vh;width: 100%;display: flex;align-items: center;justify-content: center;">
+    <div style="border: 2px solid black;padding: 50px;border-radius: 10px;max-width: 90%;">
+        <h3>Editar Producto</h3>
+        <form ng-submit="actualizarProducto()">
+            <div class="form-group">
+                <label for="editProductName"><strong>Nombre: </strong> {{product.name}} </label>
+                <input type="text" id="editProductName" placeholder="Name" ng-model="updateProduct.name"
+                    class="form-control" required>
+            </div>
+            <div class="form-group" style="overflow: hidden;">
+                <label for="editProductImage"><strong>Imagen: </strong> {{product.image}}</label>
+                <input type="text" id="editProductImage" placeholder="Imagen" ng-model="updateProduct.image"
+                    class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="editProductCategory"><strong>Categoria: </strong> {{product.category}}</label>
+                <select id="editProductCategory" ng-model="updateProduct.category_id" class="form-control" required>
+                    <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Actualizar Producto</button>
+            <a type="submit" href="#!/admin" class="btn btn-secondary" style="margin-top: 25px;">Volver</a>
+            <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
+            <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div style="height: 100vh;width: 100%;display: flex;align-items: center;justify-content: center;">
+    <div style="border: 2px solid black;padding: 50px;border-radius: 10px;">
+        <h3>Editar Categoría</h3>
+        <form ng-submit="actualizarCategory()">
+            <div class="form-group">
+                <label for="editCategoryName"><strong>Nombre: </strong> {{category.name}}</label>
+                <input type="text" id="editCategoryName" ng-model="updateCategory.name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="editCategoryIcon"><strong>Icono: </strong> {{category.icon}} </label>
+                <input type="text" id="editCategoryIcon" ng-model="updateCategory.icon" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Actualizar Categoría</button>
+            <a href="#!/admin" class="btn btn-secondary" style="margin-top: 25px;">Volver</a>
+            <p class="text-success" ng-show="successMessage">{{successMessage}}</p>
+            <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
+        </form>
+    </div>
+</div>
